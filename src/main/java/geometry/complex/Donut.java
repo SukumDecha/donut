@@ -38,7 +38,7 @@ public class Donut { // ประกาศคลาส Donut
     // เป็นฟังค์ชั่นที่จะส่งค่าหรือ return boolean เมื่อทำงานเสร็จกลับมา
     // โดยจะทำการเปลี่ยนรัศมึของ inner ด้วยการสร้าง new Circle() ทับผ่านการรับค่า newInner
     public boolean setInnerRadius(double newInner) {
-        // ตรวจสอบว่า inner มีค่าน้อยกว่าหรือเท่ากับ 0 หรือมากกว่าหรือเท่ากับ รัศมึวงกลมด้านนอก
+        // ตรวจสอบว่า newInner มีค่าน้อยกว่าหรือเท่ากับ 0 หรือ newInner มากกว่าหรือเท่ากับ รัศมึวงกลมด้านนอก
         // เป็นเงื่อนไข if ที่เอาไว้กันกรณี fail ซึ่งจะ return false ถ้าตรงตามเงื่อนไข
         if (newInner <= 0 || newInner >= getOuterRadius()) return false;
 
@@ -52,9 +52,9 @@ public class Donut { // ประกาศคลาส Donut
     public boolean setOuterRadius(double newOuter) {
         // ตรวจสอบว่า newOuter มีค่าน้อยกว่าหรือเท่ากับ DEFAULT_THICKNESS หรือ inner.getRadius() - outer น้อยกว่า DEFAULT_THICKNESS
         // เป็นเงื่อนไข if ที่เอาไว้กันกรณี fail ซึ่งจะ return false ถ้าตรงตามเงื่อนไข
-        if (newOuter <= DEFAULT_THICKNESS || (getInnerRadius() - newOuter < DEFAULT_THICKNESS)) return false;
+        if (newOuter <= DEFAULT_THICKNESS || ((newOuter - getInnerRadius()) < DEFAULT_THICKNESS)) return false;
 
-        this.outer = new Circle(outer); // สร้างวงกลม outer ใหม่ด้วยรัศมี newOuter
+        this.outer = new Circle(newOuter); // สร้างวงกลม outer ใหม่ด้วยรัศมี newOuter
         return true;
     }
 
