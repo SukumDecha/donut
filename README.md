@@ -1,6 +1,5 @@
 # donut
 
-* Question 
 
     //create a default minimum thickness of donut to 3.0 DEFAULT_THICKNESS
     //private Circle inner;
