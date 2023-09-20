@@ -1,75 +1,84 @@
-package geometry.complex;
+package geometry.complex; // กำหนดแพ็กเกจที่คลาส Donut อยู่
 
-import geometry.Circle;
+import geometry.Circle; // นำเข้าคลาส Circle จากแพ็กเกจ geometry
 
-public class Donut {
-    private  static double DEFAULT_THICKNESS = 3.0;
+public class Donut { // ประกาศคลาส Donut
+
+    // สร้างค่าคงที่ชื่อ "DEFAULT_THICKNESS" ที่มีชนิด double มีค่า 3.0
+    // มักจะใช้ static เวลาสร้างค่าคงที่ และจะตั้งชื่อตัวแปรของค่าคงที่ให้เป็นตัวพิมพ์ใหญ่ทุกตัว
+    private static double DEFAULT_THICKNESS = 3.0;
+    
+    // สร้างตัวแปรชนิด Circle 2 ตัวคือ inner และ outer
     private Circle inner, outer;
 
+    // สร้าง constructor โดยการรับค่ารัศมี inner และ outer มา
     public Donut(double innerRadius, double outerRadius) {
-        this.inner = new Circle(innerRadius);
-        this.outer = new Circle(outerRadius);
+        this.inner = new Circle(innerRadius); // สร้างวงกลม inner ด้วยรัศมี innerRadius
+        this.outer = new Circle(outerRadius); // สร้างวงกลม outer ด้วยรัศมี outerRadius
     }
 
-    public Donut(double radius) {
-        this.inner = new Circle(radius);
-    }
-
-    public Donut() {
-
-    }
-
+    // คืนค่ารัศมีวงกลมด้านใน
     public double getInnerRadius() {
+        // เข้าถึงค่ารัศมีของวงกลม inner และใช้ function getRadius() เพื่อดึงค่าของรัศมึออกมา
         return inner.getRadius();
     }
 
+    // คืนค่ารัศมีวงกลมด้านนอก
     public double getOuterRadius() {
+        // เข้าถึงค่ารัศมีของวงกลม outer และใช้ function getRadius() เพื่อดึงค่าของรัศมึออกมา
         return outer.getRadius();
     }
+    
+    // คืนค่าความหนาของโดนัท
+    public double getThickness() {
+        //วงกลมนอก - วงกลมใน
+        return getOuterRadius() - getInnerRadius();
+    }
 
-    public boolean setInnerRadius(double inner) {
-        if(inner <= 0 || inner >= outer.getRadius()) return  false;
-        this.inner = new Circle(inner);
+    // เป็นฟังค์ชั่นที่จะส่งค่าหรือ return boolean เมื่อทำงานเสร็จกลับมา
+    // โดยจะทำการเปลี่ยนรัศมึของ inner ด้วยการสร้าง new Circle() ทับผ่านการรับค่า newInner
+    public boolean setInnerRadius(double newInner) {
+        // ตรวจสอบว่า inner มีค่าน้อยกว่าหรือเท่ากับ 0 หรือมากกว่าหรือเท่ากับ รัศมึวงกลมด้านนอก
+        // เป็นเงื่อนไข if ที่เอาไว้กันกรณี fail ซึ่งจะ return false ถ้าตรงตามเงื่อนไข
+        if (newInner <= 0 || newInner >= getOuterRadius()) return false;
+
+      
+        this.inner = new Circle(newInner); // สร้างวงกลม inner ใหม่ด้วยรัศมี newInner
         return true;
     }
 
-    public boolean setOuterRadius(double outer) {
-        if(outer <= DEFAULT_THICKNESS || (inner.getRadius() - outer < DEFAULT_THICKNESS)) return  false;
-        this.outer = new Circle(outer);
+    // เป็นฟังค์ชั่นที่จะส่งค่าหรือ return boolean เมื่อทำงานเสร็จกลับมา
+    // โดยจะทำการเปลี่ยนรัศมึของ outer ด้วยการสร้าง new Circle() ทับผ่านการรับค่า newOuter
+    public boolean setOuterRadius(double newOuter) {
+        // ตรวจสอบว่า newOuter มีค่าน้อยกว่าหรือเท่ากับ DEFAULT_THICKNESS หรือ inner.getRadius() - outer น้อยกว่า DEFAULT_THICKNESS
+        // เป็นเงื่อนไข if ที่เอาไว้กันกรณี fail ซึ่งจะ return false ถ้าตรงตามเงื่อนไข
+        if (newOuter <= DEFAULT_THICKNESS || (getInnerRadius() - newOuter < DEFAULT_THICKNESS)) return false;
+
+        this.outer = new Circle(outer); // สร้างวงกลม outer ใหม่ด้วยรัศมี newOuter
         return true;
     }
 
+    /* เป็นฟังค์ชั่นที่จะส่งค่าหรือ return boolean เมื่อทำงานเสร็จกลับมา
+    / โดยจะทำการเปลี่ยนความหนาของ Donut ผ่านการเปลี่ยน
+    / รัศมึของ outer ด้วยการสร้าง new Circle() ทับผ่านการรับค่า inner + thickness
+    */
     public boolean setThickness(double thickness) {
-        if(thickness < DEFAULT_THICKNESS) return false;
-
-        this.outer = new Circle(this.inner.getRadius() + thickness);
+        // ตรวจสอบว่า thickness น้อยกว่า DEFAULT_THICKNESS
+        if (thickness < DEFAULT_THICKNESS) return false;
+        
+        // ปรับปรุงวงกลม outer โดยใช้ inner.getRadius() + thickness
+        this.outer = new Circle(getInnerRadius() + thickness);
         return true;
     }
 
     public double computeArea() {
+        // คำนวณและคืนค่าพื้นที่ของ Donut โดยคำนวณพื้นที่วงกลม outer ลบด้วยพื้นที่วงกลม inner
         return outer.computeArea() - inner.computeArea();
     }
 
     @Override
     public String toString() {
-        return String.format("Donut(%.2f, %.2f)", inner.getRadius(), outer.getRadius());
-        //Donut(inner radius,outer radius)
+        // คืนค่าสตริงที่แสดงข้อมูลของ Donut ในรูปแบบ "Donut(รัศมีภายใน, รัศมีภายนอก)"
+        return String.format("Donut(%.2f, %.2f)", getInnerRadius(), getOuterRadius());
     }
-
-    // create a default minimum thickness of donut to 3.0 DEFAULT_THICKNESS
-    //private Circle inner;
-    //private Circle outer;
-    
-    // constructor (inner radius, outer radius) // main
-    // constructor (inner radius) // delegate
-    // constructor () // delegate
-    
-    // getInnerRadius()
-    // getOuterRadius()
-    // getThickness()
-    // setInnerRadius(inner radius) // use old outer, return (boolean) false if fail
-    // setOuterRadius(outer radius) // use old inner, return (boolean) false if fail
-    // setThickness(thickness) // use old inner, return (boolean) false if fail
-    // computeArea()
-    // toString() "Donut(inner radius,outer radius)"
 }
