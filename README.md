@@ -1,9 +1,9 @@
 # donut
 
 
-    //create a default minimum thickness of donut to 3.0 DEFAULT_THICKNESS
-    //private Circle inner;
-    //private Circle outer;
+    // create a default minimum thickness of donut to 3.0 DEFAULT_THICKNESS
+    // private Circle inner;
+    // private Circle outer;
     
     // constructor (inner radius, outer radius) // main
     // constructor (inner radius) // delegate
