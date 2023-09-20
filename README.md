@@ -1,5 +1,7 @@
 # Donut - Challenge
-
+- ถ้ามีตรงไหนที่เราเขียน Code ผิด สามารถ Pull request ได้เลยนะะ
+- Discord: xfrozenz_736
+  
 ## Class Structure
 
 - `DEFAULT_THICKNESS`: Create a default minimum thickness of the donut, set to `3.0`.
