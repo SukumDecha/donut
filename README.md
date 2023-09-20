@@ -28,4 +28,4 @@
 
 ```markdown
 Example:
-Donut(5.0, 8.0)
+Donot donut = new Donut(5.0, 8.0)
