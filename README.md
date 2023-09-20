@@ -4,7 +4,7 @@
 
 # HINTS 
 
-- `class Circle` อาจารย์ให้มาแล้ว แค่สร้าง class Donut
+- class `Circle` อาจารย์ให้มาแล้ว แค่สร้าง class `Donut`
 
 ## Class Structure
 
@@ -12,8 +12,8 @@
 
 ## Private Fields
 
-- `inner`: A private "Circle" field representing the inner circle.
-- `outer`: A private "Circle field representing the outer circle.
+- `inner`: A private `Circle` field representing the inner circle.
+- `outer`: A private `Circle` field representing the outer circle.
 
 ## Constructors
 
