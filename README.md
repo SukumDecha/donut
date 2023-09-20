@@ -1,15 +1,19 @@
-# Donut - Challenge
+# Create class named "Donut"
 - ถ้ามีตรงไหนที่เราเขียน Code ผิด สามารถ Pull request ได้เลยนะะ
 - Discord: xfrozenz_736
-  
+
+# HINTS 
+
+- `class Circle` อาจารย์ให้มาแล้ว แค่สร้าง class Donut
+
 ## Class Structure
 
-- `DEFAULT_THICKNESS`: Create a default minimum thickness of the donut, set to `3.0`.
+- `DEFAULT_THICKNESS`: Create a default "double" minimum thickness of the donut, set to `3.0`.
 
 ## Private Fields
 
-- `inner`: A private field representing the inner circle.
-- `outer`: A private field representing the outer circle.
+- `inner`: A private "Circle" field representing the inner circle.
+- `outer`: A private "Circle field representing the outer circle.
 
 ## Constructors
 
